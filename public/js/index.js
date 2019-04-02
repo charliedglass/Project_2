@@ -25,10 +25,6 @@
         $("#inputEmail").text("");
         $("#inputPassword").val("");
         $("#inputConfirmPassword").val("");
-        $("#inputAddress").val("");
-        $("#inputCity").val("");
-        $("#inputState").val("");
-        $("#inputZip").val("");
       });
 }
 
@@ -112,6 +108,41 @@ function send_sign_form(){
         sign_in($("#inputEmail").val().trim(), $("#inputPassword").val().trim());
     }
 }
+
+  //This Firebase function occurs when a user signs in or signs out, extracts the user's unique id, and sets Firebase values based on given inputs
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      sessionStorage.setItem("uid", user.uid);
+      //Checks that the user just signed up
+      if(which_form() == "Sign Up" && $("#inputName").val().trim() != ""){
+        new_user = {
+          uid: user.uid,
+          name: $("#inputName").val().trim()
+        };
+
+        $.ajax("/api/new_user", {
+          type: "POST",
+          data: new_user
+        })
+      }
+        else{
+            database.ref(user.uid).update({
+                last_login: moment().format("YYYY-MM-DD hh:mm a")
+            });
+        }
+
+        
+      $("#inputName").val("");
+      $("#inputtEmail").val("");
+      $("#inputPassword").val("");
+      $("#inputConfirmPassword").val("");
+      $("#inputAddress").val("");
+      $("#inputCity").val("");
+      $("#inputState").val("");
+      $("#inputZip").val("");
+    }
+  });
 
     //Sets background color of sign page sign in button and hides sign up info
     $(".sign-in-select").on("click", function(){

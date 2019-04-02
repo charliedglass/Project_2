@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var Messages = sequelize.define("users", {
+    var Messages = sequelize.define("messages", {
       id: {
           type: DataTypes.INTEGER,
           allowNull: false,

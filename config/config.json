@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "Glassmane1!",
-    "database": "exampledb",
+    "database": "chatdb",
     "host": "localhost",
     "dialect": "mysql"
   },
