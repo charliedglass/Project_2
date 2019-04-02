@@ -1,3 +1,242 @@
-.list-group-item {
-  line-height: 2.5;
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+  z-index: -1;
+}
+
+.calendar{
+  z-index: 1;
+  border-radius: 25px;
+  border-color: transparent !important;
+  border-style: transparent !important;
+}
+
+
+.option{
+  font-size: 40px;
+  border-style: transparent;
+  border-radius: 15px;
+  border-color: transparent;
+}
+
+.option:hover{
+  border-color: grey;
+}
+
+.option:focus{
+  outline: 0px;
+}
+
+.sign-up-select{
+  background-color: #007bff;
+  color: white;
+}
+
+.sign-in-select{
+  background-color: white;
+}
+
+.sign-opts{
+  text-align: center;
+  vertical-align: middle;
+}
+
+#bar{
+  font-size: 40px;
+}
+
+.submit-btn{
+  min-width: 100%;
+}
+
+.sign-form{
+  border-style: solid;
+  border-width: 2px;
+  border-color: lightgrey;
+  border-radius: 25px;
+  padding: 15px;
+}
+
+.required{
+  color: red;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+tr{
+  border: none !important;
+}
+
+td, th{
+  border-top: none !important;
+  border-bottom: none !important;
+  height: 116px !important;
+  min-width: 116px !important;
+}
+
+#day-0-date, #day-1-date, #day-2-date, #day-3-date, #day-4-date, #day-5-date, #day-6-date, #day-7-date{
+  min-width: 116px !important;
+}
+
+#day-7-date{
+  border-right: none !important;
+}
+
+th{
+  text-align: right !important;
+  border-right: solid 1px lightgrey !important;
+}
+.day-display{
+  color:grey;
+}
+
+.date-display{
+  font-size: 60px !important;
+  color: black;
+  font-weight: normal !important;
+}
+
+#month-caption{
+  caption-side: top !important;
+  font-size: 40px;
+  color: #007bff !important;
+  font-weight: 900;
+  text-align: left;
+  position: sticky !important;
+  left: 0;
+  display: inline;
+}
+
+.nav-events{
+  background-color: rgb(0, 123, 255, 0.2)!important;
+  font-size: 20px !important;
+  position: sticky !important;
+  top: 0;
+}
+
+.date-jump-submit{
+  background-color: rgb(0, 123, 255)!important;
+  font-size: 20px;
+  color: white;
+  border: none !important;
+  border-radius: 10px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+#date-jump-text{
+  vertical-align: middle;
+  font-size: 20px;
+  width: 150px;
+  height: 40px;
+}
+
+.nav-event, nav li{
+  color: white !important;
+  font-weight: bold !important;
+  opacity: 1 !important;
+  background-color: none;
+}
+
+.time-display{
+  vertical-align: top !important;
+  text-align: right;
+  padding-top: 0px !important;
+  padding-right: 1px !important;
+}
+
+.event-cell:hover{
+  cursor: pointer;
+}
+
+table{
+  width: 928px !important;
+}
+
+table thead tr{
+  display: block !important;
+}
+
+
+table th,table td{
+  width:116px;
+}
+
+
+table  tbody{
+display:block;
+height:500px;
+overflow:auto;
+}
+
+.active{
+  font-weight: bolder;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.event-cell{
+  position: relative;
+  text-overflow: ellipsis;
+}
+
+#date-jump{
+  float: right;
+  position: sticky;
+  right: 0;
+  vertical-align: middle !important;
+  max-width: 100%;
+  clear: both;
+
+}
+
+caption{
+  caption-side: top !important;
+}
+
+.credit{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  font-size: 7px;
+  text-align: right;
+}
+
+.credit a{
+  font-size: 1px !important;
+}
+
+@media screen and (min-width: 992px){
+  .right{
+      position: absolute;
+      right: 0 !important;
+  }
+}
+
+@media screen and (max-width: 992px){
+  #month-caption{
+      float: left;
+      clear: both;
+  }
+  td,th,#day-0-date, #day-1-date, #day-2-date, #day-3-date, #day-4-date, #day-5-date, #day-6-date, #day-7-date{
+      min-width: 200px !important;
+  }
+
+}
+
+@media screen and (max-width: 549px){
+  #month-caption{
+      float: left;
+      clear: both;
+      font-size: 32px;
+  }
+  td,th,#day-0-date, #day-1-date, #day-2-date, #day-3-date, #day-4-date, #day-5-date, #day-6-date, #day-7-date{
+      min-width: 125px !important;
+  
+  }
+
+
 }

@@ -1,99 +1,147 @@
-// Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
-var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
-
-// The API object contains methods for each kind of request we'll make
-var API = {
-  saveExample: function(example) {
-    return $.ajax({
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      url: "api/examples",
-      data: JSON.stringify(example)
-    });
-  },
-  getExamples: function() {
-    return $.ajax({
-      url: "api/examples",
-      type: "GET"
-    });
-  },
-  deleteExample: function(id) {
-    return $.ajax({
-      url: "api/examples/" + id,
-      type: "DELETE"
-    });
-  }
-};
-
-// refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
-      var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
-
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": example.id
-        })
-        .append($a);
-
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
-
-      $li.append($button);
-
-      return $li;
-    });
-
-    $exampleList.empty();
-    $exampleList.append($examples);
-  });
-};
-
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
-var handleFormSubmit = function(event) {
-  event.preventDefault();
-
-  var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
+  $(document).ready(function(){
+     // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCbo4t29qLtGPTCuHbwqTKhVBbJiZX4V3c",
+    authDomain: "chat-app-2809f.firebaseapp.com",
+    databaseURL: "https://chat-app-2809f.firebaseio.com",
+    projectId: "chat-app-2809f",
+    storageBucket: "chat-app-2809f.appspot.com",
+    messagingSenderId: "674017311022"
   };
+  firebase.initializeApp(config); 
 
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
-    return;
-  }
+  //This function checks if the signup forms are valid. If they are, a new user is created with Firebase Authentication
+  console.log("hello");
+  function create_user(email, password){
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+  
+        $("#error-body").text(errorMessage);
+        $("#myModal").modal('show');
 
-  API.saveExample(example).then(function() {
-    refreshExamples();
+        $("#inputName").val("");
+        $("#inputEmail").text("");
+        $("#inputPassword").val("");
+        $("#inputConfirmPassword").val("");
+        $("#inputAddress").val("");
+        $("#inputCity").val("");
+        $("#inputState").val("");
+        $("#inputZip").val("");
+      });
+}
+
+//This function checks if sign in credentials are valid, and displays an error message if they are not
+function sign_in(email, password){
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+      
+        $("#error-body").text(errorMessage);
+        $("#myModal").modal('show');
+        
+        $("#inputEmail").text("");
+        $("#inputPassword").val("");
+
+      });
+}
+
+
+//Function verifies that city, state, name, and other str fields are more than 0 characters long
+function name_verification(name){
+    if (name.length > 0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+//This function checks if the user retyped their password correctly
+function confirm_password(pass, confirm){
+    if (pass == confirm){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+//This function returns whether the form submitted is the Sign-In or Sign-Up form
+function which_form(){
+    return $(".submit-btn").text();
+}
+
+//This function checks the sign form for valid entries in required fields and submits it if everything is indeed valid
+function send_sign_form(){
+    var form = which_form();
+    if (form == "Sign Up"){
+        var errors = [];
+        var str_field_check = name_verification($("#inputName").val().trim());
+        var confirm_check = confirm_password($("#inputPassword").val(), $("#inputConfirmPassword").val());
+        if (str_field_check == false){
+            errors.push("Please fill in all required fields");
+        }
+        if (confirm_check == false){
+            errors.push("Your password confirmation failed");
+        };
+        if (errors.length == 0){
+            //Create the user if there are no errors
+            create_user($("#inputEmail").val().trim(), $("#inputPassword").val());
+        }
+        else{
+            $("#error-body").html("");
+            $("#error-body").append($("<div>").text("There are error(s) with your submission:"));
+            errors.forEach(function(value){
+                $("#error-body").append($("<div>").text(value));
+            });
+            $("#myModal").modal('show');
+            
+            $("#inputName").val("");
+            $("#inputEmail").val("");
+            $("#inputPassword").val("");
+            $("#inputConfirmPassword").val("");
+
+
+        }
+    }
+    else{
+        //signs the user in if the sign in form was submitted
+        sign_in($("#inputEmail").val().trim(), $("#inputPassword").val().trim());
+    }
+}
+
+    //Sets background color of sign page sign in button and hides sign up info
+    $(".sign-in-select").on("click", function(){
+      console.log("hello");
+      $(this).css("color", "white");
+      $(this).css("background-color", "#007bff");
+      $(".sign-up-select").css("color", "black");
+      $(".sign-up-select").css("background-color", "white");
+
+      $(".exclusive").hide();
+
+      $(".submit-btn").text("Sign In");
   });
 
-  $exampleText.val("");
-  $exampleDescription.val("");
-};
+  //Sets sign up button to different color
+  $(".sign-up-select").on("click", function(){
+      $(this).css("color", "white");
+      $(this).css("background-color", "#007bff");
+      $(".sign-in-select").css("color", "black");
+      $(".sign-in-select").css("background-color", "white");
 
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function() {
-  var idToDelete = $(this)
-    .parent()
-    .attr("data-id");
+      $(".exclusive").show();
 
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
+      $(".submit-btn").text("Sign Up");
   });
-};
 
-// Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+    //Sends sign form
+    $(".submit-btn").on("click", function(event){
+      event.preventDefault();
+      send_sign_form();
+      });
+  });
+
