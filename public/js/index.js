@@ -31,6 +31,7 @@
 
 //This function checks if sign in credentials are valid, and displays an error message if they are not
 function sign_in(email, password){
+    window.location.replace("/messages/"+sessionStorage.getItem("uid"));
     firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -126,14 +127,17 @@ function send_sign_form(){
           type: "POST",
           data: new_user
         }).then(function(){
-          window.location("/messages/"+user.uid);
+          window.location.replace("/messages/"+user.uid);
           console.log("hello goodbye");
           // $(location).attr("href", "/messages/"+user.uid);
         });
+        
+        // window.location.replace("/messages/"+user.uid);
+        
       }
-        else{
-          window.location("/messages/"+user.uid);
-        }
+        // else{
+        //   window.location.replace("/messages/"+user.uid);
+        // }
 
         
       $("#inputName").val("");
@@ -175,9 +179,9 @@ function send_sign_form(){
       });
 
       $("#signOut").on("click", function(){
+        window.location.replace("/");
         firebase.auth().signOut().then(function(){}).catch(function(error) {
-            // An error happened.
-            window.location("/");
+            // An error happened
           });
       });
   });
