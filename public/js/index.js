@@ -13,6 +13,7 @@
   //This function checks if the signup forms are valid. If they are, a new user is created with Firebase Authentication
   console.log("hello");
   function create_user(email, password){
+    sessionStorage.clear();
     firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -120,16 +121,18 @@ function send_sign_form(){
           uid: user.uid,
           name: $("#inputName").val().trim()
         };
-
+        console.log(new_user);
         $.ajax("/api/new_user", {
           type: "POST",
           data: new_user
-        })
+        }).then(function(){
+          window.location("/messages/"+user.uid);
+          console.log("hello goodbye");
+          // $(location).attr("href", "/messages/"+user.uid);
+        });
       }
         else{
-            database.ref(user.uid).update({
-                last_login: moment().format("YYYY-MM-DD hh:mm a")
-            });
+          window.location("/messages/"+user.uid);
         }
 
         
@@ -137,10 +140,6 @@ function send_sign_form(){
       $("#inputtEmail").val("");
       $("#inputPassword").val("");
       $("#inputConfirmPassword").val("");
-      $("#inputAddress").val("");
-      $("#inputCity").val("");
-      $("#inputState").val("");
-      $("#inputZip").val("");
     }
   });
 
@@ -173,6 +172,13 @@ function send_sign_form(){
     $(".submit-btn").on("click", function(event){
       event.preventDefault();
       send_sign_form();
+      });
+
+      $("#signOut").on("click", function(){
+        firebase.auth().signOut().then(function(){}).catch(function(error) {
+            // An error happened.
+            window.location("/");
+          });
       });
   });
 

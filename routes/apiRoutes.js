@@ -13,22 +13,30 @@ module.exports = function(app) {
       }}
     ).then(function(dbExample) {
       res.json(dbExample);
-      location.reload();
     });
   });
 
   // Create a new example
-  app.post("/api/:myUID/:myName/:toUID/:toName/new_message", function(req, res) {
-    db.Messages.create(req.body).then(function(dbExample) {
+  app.post("/api/:myUID/:myName/:toUID/:toName/:message/new_message", function(req, res) {
+    db.Messages.create({
+      from_uid: req.params.myUID,
+      from_name: req.params.myName,
+      to_uid: req.params.toUID,
+      to_name: req.params.toName,
+      message: req.params.message
+    }).then(function(dbExample) {
       res.json(dbExample);
       location.reload();
     });
   });
 
   app.post("/api/new_user", function(req, res) {
-    db.Users.create(req.body).then(function(dbExample) {
+    console.log(db.Users);
+    db.Users.create({
+      uid: req.body.uid,
+      name: req.body.name
+    }).then(function(dbExample) {
       res.json(dbExample);
-      location.reload();
     });
   });
 

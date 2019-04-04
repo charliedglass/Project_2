@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var Messages = sequelize.define("messages", {
+    var Messages = sequelize.define("Messages", {
       id: {
           type: DataTypes.INTEGER,
           allowNull: false,
@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
       to_uid: DataTypes.STRING,
       to_name: DataTypes.TEXT,
       message: DataTypes.TEXT,
-      read: {
+      isRead: {
           type: DataTypes.BOOLEAN,
           defaultValue: false
       },
