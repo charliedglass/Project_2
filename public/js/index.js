@@ -31,7 +31,6 @@
 
 //This function checks if sign in credentials are valid, and displays an error message if they are not
 function sign_in(email, password){
-    window.location.replace("/messages/"+sessionStorage.getItem("uid"));
     firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -44,6 +43,7 @@ function sign_in(email, password){
         $("#inputPassword").val("");
 
       });
+      window.location.replace("/messages/"+sessionStorage.getItem("uid"));
 }
 
 
@@ -87,6 +87,7 @@ function send_sign_form(){
         };
         if (errors.length == 0){
             //Create the user if there are no errors
+            sessionStorage.clear();
             create_user($("#inputEmail").val().trim(), $("#inputPassword").val());
         }
         else{
@@ -107,6 +108,7 @@ function send_sign_form(){
     }
     else{
         //signs the user in if the sign in form was submitted
+        sessionStorage.clear();
         sign_in($("#inputEmail").val().trim(), $("#inputPassword").val().trim());
     }
 }
@@ -135,9 +137,9 @@ function send_sign_form(){
         // window.location.replace("/messages/"+user.uid);
         
       }
-        // else{
-        //   window.location.replace("/messages/"+user.uid);
-        // }
+        else{
+          sign_in($("#inputEmail").val().trim(), $("#inputPassword").val().trim());
+        }
 
         
       $("#inputName").val("");

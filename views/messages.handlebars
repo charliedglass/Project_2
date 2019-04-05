@@ -1,47 +1,56 @@
-<div class="container" id = "appContainer">
-  <div class = "row mb-0" id = "messagesHeaderContainer">
-    <div class = "col-md-3" id = "userSearchContainer">
-        <input class="form-control" id="myInput" type="text" placeholder="Search a User..">
+<div class="container-fluid" id = "appContainer">
+  <div class = "row mb-0 d-flex align-items-center" id = "messagesHeaderContainer">
+    <div class = "col-3" id = "userSearchContainer">
+          <input class="form-control" id="myInput" type="text" placeholder="Search a User..">
         <br>
         <ul class="list-group" id="myList">
           {{#each searchUsers}}
-            <li class="list-group-item" data-other-user-id = {{uid}} data-other-user-name = {{name}}>{{name}}</li>
+            <li class="list-group-item" data-other-user-id = {{uid}} data-other-user-name = {{name_data}}>{{name}}</li>
           {{/each}}
         </ul>  
     </div>
-    <div class = "col-md-9" id = "toNameContainer">
-      <div class = "row">
-        <div class = "col-md-4 offset-md-4" id = "toName"></div>
-        <div class = "col-md-2 offset-md-2">
-          <button id = "signOut">Sign Out</button>
+    <div class = "col-9" id = "toNameContainer">
+      <div class = "row d-flex align-items-center">
+        <div class = "col-4 offset-4" id = "toNameSub">
+          <div class = "row justify-content-center">
+            <div class = "icon rounded-circle" id = "toNameicon"></div>
+          </div>
+          <div class = "row justify-content-center p-0">
+            <div class = "col-10" id = "toName"></div>
+          </div>
+        </div>
+        <div class = "col-2 offset-2">
+          <button id = "signOut"><i class="fa fa-sign-out"></i></button>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="row m-0">
-    <div class="col-md-3 m-0" id = "usersContainer">
+  <div class="row below-header m-0">
+    <div class="col-3 m-0" id = "usersContainer">
       {{#each users}}
-        <div class = "row m-0 userDiv" id = {{other_user_id}} data-user-other-name = {{other_user_name}} data-my-user-id = {{myself.myUID}}>
+        <div class = "row m-0 userDiv d-flex align-items-center" id = {{other_user_id}} data-user-other-name = {{other_user_name_data}} data-my-user-id = {{myself.myUID}}>
           {{#if isUnread}}
-            <div class = "col-md-2 messagesUnread"></div>
+            <div class = "messagesUnread icon rounded-circle"></div>
+          {{else}}
+            <div class = "messagesRead icon rounded-circle"></div>
           {{/if}}
-          <div class = "col-md-10 otherUserName">{{other_user_name}}</div>
+          <div class = "col-9 otherUserName">{{other_user_name}}</div>
         </div>
       {{/each}}
     </div>
 
-    <div class = "col-md-9" id = "messagesContainer">
+    <div class = "col-9" id = "messagesContainer">
       <div class = "row">
-        <div class = "col-md-12" id = "messagesDiv">
+        <div class = "col-12" id = "messagesDiv">
             {{#each messages}}
               <div class = "row">
               {{#if fromOther}}
-                <div class = "col-md-6 message fromOther" id = {{id}} data-other-id = {{message_other_user_id}} data-other-name = {{message_other_user_name}} data-my-id = {{myUID}} data-my-name = {{myName}} data-from-id = {{from_uid}} data-from-name = {{from_name}} data-to-id = {{to_uid}} data-to-name = {{to_name}}>
+                <div class = "message fromOther" id = {{id}} data-other-id = {{message_other_user_id}} data-other-name = {{message_other_user_name_data}} data-my-id = {{myUID}} data-my-name = {{myName}} data-from-id = {{from_uid}} data-from-name = {{from_name_data}} data-to-id = {{to_uid}} data-to-name = {{to_name_data}}>
                   {{message}}
                 </div>
               {{else}}
-                <div class = "col-md-6 offset-md-6 message fromMe" id = {{id}} data-other-id = {{message_other_user_id}} data-other-name = {{message_other_user_name}} data-my-id = {{myUID}} data-my-name = {{myName}} data-from-id = {{from_uid}} data-from-name = {{from_name}} data-to-id = {{to_uid}} data-to-name = {{to_name}}>
+                <div class = "ml-auto message fromMe" id = {{id}} data-other-id = {{message_other_user_id}} data-other-name = {{message_other_user_name}} data-my-id = {{myUID}} data-my-name = {{myName}} data-from-id = {{from_uid}} data-from-name = {{from_name_data}} data-to-id = {{to_uid}} data-to-name = {{to_name_data}}>
                   {{message}}
                 </div>
               {{/if}}
@@ -49,10 +58,16 @@
             {{/each}}
         </div>
       </div>
-      <h1>Hello {{myself.name}}</h1>
       <div class = "row">
-        <div class = "col-md-12" id = "textField">
-          <input type = "text" id = "messageText" placeholder = "Message"></textarea> <button type = "submit" id = "sendMessage" data-my-name = {{myself.myName}} >Send</button>
+        <div class = "col-12" id = "textField">
+          <div class = "row d-flex align-items-center">
+            <div class = "col-11 mr-0 pr-0">
+              <input type = "text" id = "messageText" placeholder = "Message" data-my-name = {{myself.myName}}></textarea> 
+            </div>
+            <div class = "col-1">
+              <button type = "submit" class = "rounded-circle" id = "sendMessage" data-my-name = {{myself.myName}}>&#8593;</button>
+            </div>
+          </div>
         </div>
       </div>
 

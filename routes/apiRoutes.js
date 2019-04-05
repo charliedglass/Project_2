@@ -5,7 +5,7 @@ module.exports = function(app) {
   app.put("/api/:myUID/:otherUID/read", function(req, res) {
     db.Messages.update(
       {
-        read: true
+        isRead: true
       },
       {where: {
           from_uid: req.params.otherUID,

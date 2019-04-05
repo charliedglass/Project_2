@@ -1,4 +1,4 @@
-#myVideo {
+/* #myVideo {
   position: fixed;
   right: 0;
   bottom: 0;
@@ -13,6 +13,7 @@
   border-color: transparent !important;
   border-style: transparent !important;
 }
+*/
 
 
 .option{
@@ -44,6 +45,16 @@
   vertical-align: middle;
 }
 
+#signOut{
+  font-size: 24px;
+  background-color: transparent;
+  border: none;
+}
+
+#signOut:hover{
+  color: white;
+}
+
 #bar{
   font-size: 40px;
 }
@@ -66,156 +77,174 @@
   font-size: 20px;
 }
 
-tr{
-  border: none !important;
-}
-
-td, th{
-  border-top: none !important;
-  border-bottom: none !important;
-  height: 116px !important;
-  min-width: 116px !important;
-}
-
-#day-0-date, #day-1-date, #day-2-date, #day-3-date, #day-4-date, #day-5-date, #day-6-date, #day-7-date{
-  min-width: 116px !important;
-}
-
-#day-7-date{
-  border-right: none !important;
-}
-
-th{
-  text-align: right !important;
-  border-right: solid 1px lightgrey !important;
-}
-.day-display{
-  color:grey;
-}
-
-.date-display{
-  font-size: 60px !important;
-  color: black;
-  font-weight: normal !important;
-}
-
-#month-caption{
-  caption-side: top !important;
-  font-size: 40px;
-  color: #007bff !important;
-  font-weight: 900;
-  text-align: left;
-  position: sticky !important;
-  left: 0;
-  display: inline;
-}
-
-.nav-events{
-  background-color: rgb(0, 123, 255, 0.2)!important;
-  font-size: 20px !important;
-  position: sticky !important;
-  top: 0;
-}
-
-.date-jump-submit{
-  background-color: rgb(0, 123, 255)!important;
-  font-size: 20px;
-  color: white;
-  border: none !important;
-  border-radius: 10px;
-  margin-left: 5px;
-  vertical-align: middle;
-}
-
-#date-jump-text{
+.userDiv{
+  width: 100%;
+  height: 100px;
+  border-bottom: 0.5px solid grey;
+  padding: 15px;
   vertical-align: middle;
   font-size: 20px;
-  width: 150px;
-  height: 40px;
 }
 
-.nav-event, nav li{
-  color: white !important;
-  font-weight: bold !important;
-  opacity: 1 !important;
-  background-color: none;
+h6{
+  margin-top: 15px;
 }
 
-.time-display{
-  vertical-align: top !important;
-  text-align: right;
-  padding-top: 0px !important;
-  padding-right: 1px !important;
-}
-
-.event-cell:hover{
-  cursor: pointer;
-}
-
-table{
-  width: 928px !important;
-}
-
-table thead tr{
-  display: block !important;
-}
-
-
-table th,table td{
-  width:116px;
-}
-
-
-table  tbody{
-display:block;
-height:500px;
-overflow:auto;
-}
-
-.active{
-  font-weight: bolder;
+#messagesHeaderContainer{
+  background-color: lightgrey;
+  width: 100%;
+  margin: 0;
   text-align: center;
   vertical-align: middle;
 }
 
-.event-cell{
+
+#messagesContainer{
+  height: 90.2vh;
+  border-left: 0.5px solid grey;
   position: relative;
-  text-overflow: ellipsis;
+  /* overflow-x: hidden;
+  overflow-y: auto; */
 }
 
-#date-jump{
-  float: right;
-  position: sticky;
+#messagesDiv{
+  height: 84vh;
+  position: absolute;
+  bottom: 6vh;
+  padding-top: 3vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.fromOther{
+  background-color: lightgrey;
+  color: black;
+  margin-right: 2%;
+  /* border-width: 1px;
+  border-style: solid; */
+  border-radius: 15px;
+}
+
+.fromMe{
+  background-color: #0095ff;
+  color: white;
+  margin-left: 2%;
+  /* border-width: 1px;
+  border-style: solid; */
+  border-radius: 15px;
   right: 0;
-  vertical-align: middle !important;
-  max-width: 100%;
-  clear: both;
-
 }
 
-caption{
-  caption-side: top !important;
+.message{
+  display: none;
+  margin: 15px;
+  padding: 8px;
+  max-width: 35%;
 }
 
-.credit{
+#usersContainer{
+  padding-left: 0;
+  padding-right: 0;
+  height: 90.2vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+#myInput{
+  margin: auto;
+  border-radius: 15px;
+}
+
+.list-group{
+  z-index: 1;
   position: fixed;
+}
+
+.list-group-item{
+  text-align: left;
+  width: 300px;
+}
+
+.list-group-item:hover{
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+#textField{
+  position: absolute;
   bottom: 0;
-  left: 0;
-  font-size: 7px;
-  text-align: right;
+  background-color: lightgrey;
+  padding: 10px !important;
 }
 
-.credit a{
-  font-size: 1px !important;
+#messageText{
+  width: 100%;
+  border-radius: 15px;
+  padding: 5px;
 }
 
-@media screen and (min-width: 992px){
-  .right{
-      position: absolute;
-      right: 0 !important;
+*:focus{
+  outline: none;
+}
+
+#sendMessage{
+  text-align: center;
+  vertical-align: middle;
+  height: 40px;
+  width: 40px;
+  font-size: 30px;
+  font-weight: bold;
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.icon{
+  color: white;
+  background-color: darkgrey;
+  font-size: 30px;
+  text-align: center;
+  vertical-align: middle;
+  height: 50px;
+  width: 50px;
+  margin: auto;
+}
+
+.messagesUnread{
+  background-color: rgb(255, 0, 8);
+  font-weight: bold;
+}
+
+.container-fluid{
+  padding: 0 !important; 
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+
+@media screen and (max-width: 927px){
+  .otherUserName{
+      display: none;
   }
 }
 
+@media screen and (max-width: 800px){
+  #sendMessage{
+      display: none;
+  }
+}
+
+@media screen and (max-width: 500px){
+  .message{
+      max-width: 75%;
+  }
+  #myInput::placeholder{
+    font-size: 15px;
+  }
+}
+
+/*
 @media screen and (max-width: 992px){
   #month-caption{
       float: left;
@@ -239,4 +268,4 @@ caption{
   }
 
 
-}
+} */
