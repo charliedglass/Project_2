@@ -1,6 +1,6 @@
 var db = require("../models");
 
-var path = require('path');
+var notifier = require("node-notifier");
 
 module.exports = function(app) {
 
@@ -53,6 +53,7 @@ module.exports = function(app) {
                 [db.sequelize.literal("CASE WHEN from_uid != '" + req.params.myUID + "' THEN from_name ELSE to_name END"), "message_other_name"], 
                 [db.sequelize.literal("CASE WHEN from_uid != '" + req.params.myUID + "' THEN from_uid ELSE to_uid END"), "message_other_user_id"],
                 [db.sequelize.literal("CASE WHEN from_uid != '" + req.params.myUID + "' THEN true ELSE false END"), "fromOther"],
+                [db.sequelize.literal("CASE WHEN wasNotified = false THEN 0 ELSE 1 END"), "wasNotified"],
                 "from_uid",
                 "to_uid",
                 "from_name",
@@ -96,6 +97,20 @@ module.exports = function(app) {
               console.log(rendered);
 
               data3.forEach(function(value){
+                console.log(value.wasNotified);
+                console.log(typeof value.wasNotified);
+                if (value.wasNotified == 0 && value.fromOther == true){
+                  console.log("notification time");
+                  console.log(value);
+                  console.log({title: value.from_name, message: value.message});
+                  notifier.notify({
+                    title: value.from_name,
+                    message: value.message
+                  });
+                }
+                else{
+                  console.log("no no no");
+                }
                 value["message_other_name_data"] = value["message_other_name"].replace(" ", "_");
                 value["from_name_data"] = value["from_name"].replace(" ", "_");
                 value["to_name_data"] = value["to_name"].replace(" ", "_");

@@ -15,6 +15,10 @@ module.exports = function(sequelize, DataTypes) {
           type: DataTypes.BOOLEAN,
           defaultValue: false
       },
+      wasNotified: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    },
       created_at: {
           type: DataTypes.DATE,
           allowNull: false,

@@ -16,6 +16,17 @@ module.exports = function(app) {
     });
   });
 
+  app.put("/api/was-notified/:myUID", function(req, res) {
+    db.Messages.update(
+      {
+        wasNotified: true
+      },
+      {where:{
+        to_uid: req.params.myUID
+      }} 
+    )
+  });
+
   // Create a new example
   app.post("/api/:myUID/:myName/:toUID/:toName/:message/new_message", function(req, res) {
     db.Messages.create({

@@ -10,6 +10,7 @@
   };
   firebase.initializeApp(config); 
 
+
   //This function checks if the signup forms are valid. If they are, a new user is created with Firebase Authentication
   console.log("hello");
   function create_user(email, password){

@@ -2,12 +2,22 @@ $(document).ready(function(){
 
 var other_id = sessionStorage.getItem("other_id", other_id);
 var other_name = sessionStorage.getItem("other_name", other_name);
+
+$("#refresh").on("click", function(){
+    location.reload();
+});
+
 //get user you're talking to and put in header
 $("#toName").text(other_name);
 if (other_name != null){
     //make icon capital letters in user's name
     $("#toNameicon").text(other_name.replace(/[a-z|\s]/g, '').substring(0,2));
 }
+
+$.ajax("/api/was-notified/"+sessionStorage.getItem("uid"), {
+    type: "PUT"
+});
+
 //show messages with selected user, change user dive to blue
 $("div[data-other-id='"+other_id+"']").show();
 $("div[data-other-id='"+other_id+"']").css("display", "inline-block");

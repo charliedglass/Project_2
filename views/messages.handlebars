@@ -20,6 +20,7 @@
           </div>
         </div>
         <div class = "col-2 offset-2">
+          <button id = "refresh"><i class="fa fa-refresh"></i></button>
           <button id = "signOut"><i class="fa fa-sign-out"></i></button>
         </div>
       </div>
@@ -46,11 +47,11 @@
             {{#each messages}}
               <div class = "row">
               {{#if fromOther}}
-                <div class = "message fromOther" id = {{id}} data-other-id = {{message_other_user_id}} data-other-name = {{message_other_user_name_data}} data-my-id = {{myUID}} data-my-name = {{myName}} data-from-id = {{from_uid}} data-from-name = {{from_name_data}} data-to-id = {{to_uid}} data-to-name = {{to_name_data}}>
+                <div class = "message fromOther" id = {{id}} data-other-id = {{message_other_user_id}} data-other-name = {{message_other_user_name_data}} data-my-id = {{myUID}} data-my-name = {{myName}} data-from-id = {{from_uid}} data-from-name = {{from_name_data}} data-to-id = {{to_uid}} data-to-name = {{to_name_data}} data-was-notified = {{wasNotified}}>
                   {{message}}
                 </div>
               {{else}}
-                <div class = "ml-auto message fromMe" id = {{id}} data-other-id = {{message_other_user_id}} data-other-name = {{message_other_user_name}} data-my-id = {{myUID}} data-my-name = {{myName}} data-from-id = {{from_uid}} data-from-name = {{from_name_data}} data-to-id = {{to_uid}} data-to-name = {{to_name_data}}>
+                <div class = "ml-auto message fromMe" id = {{id}} data-other-id = {{message_other_user_id}} data-other-name = {{message_other_user_name}} data-my-id = {{myUID}} data-my-name = {{myName}} data-from-id = {{from_uid}} data-from-name = {{from_name_data}} data-to-id = {{to_uid}} data-to-name = {{to_name_data}} data-was-notified = {{wasNotified}}>
                   {{message}}
                 </div>
               {{/if}}
