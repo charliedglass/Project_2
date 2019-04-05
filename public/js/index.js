@@ -43,7 +43,7 @@ function sign_in(email, password){
         $("#inputPassword").val("");
 
       });
-      window.location.replace("/messages/"+sessionStorage.getItem("uid"));
+      window.location.replace("/messages/"+firebase.auth().currentUser.uid);
 }
 
 
@@ -108,8 +108,10 @@ function send_sign_form(){
     }
     else{
         //signs the user in if the sign in form was submitted
-        sessionStorage.clear();
+        sessionStorage.clear("other_id");
+        sessionStorage.clear("other_name");
         sign_in($("#inputEmail").val().trim(), $("#inputPassword").val().trim());
+
     }
 }
 
@@ -134,7 +136,7 @@ function send_sign_form(){
           // $(location).attr("href", "/messages/"+user.uid);
         });
         
-        // window.location.replace("/messages/"+user.uid);
+      
         
       }
         else{
