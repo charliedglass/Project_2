@@ -17,6 +17,7 @@
     "http": "0.0.0",
     "mysql2": "^1.6.4",
     "node-notifier": "^5.4.0",
+    "notify-send": "^0.1.2",
     "path": "^0.12.7",
     "sequelize": "^4.41.2",
     "socket.io": "^2.2.0"
