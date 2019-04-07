@@ -100,6 +100,7 @@ module.exports = function(app) {
                     title: value.from_name,
                     message: value.message
                   });
+                  console.log("notified");
                 }
                 else{
                 }
