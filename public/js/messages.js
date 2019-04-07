@@ -16,9 +16,9 @@ if (other_name != null){
 }
 
 //update that the user was notified of the message
-// $.ajax("/api/was-notified/"+sessionStorage.getItem("uid"), {
-//     type: "PUT"
-// });
+$.ajax("/api/was-notified/"+sessionStorage.getItem("uid"), {
+    type: "PUT"
+});
 
 //show messages with selected user, change user dive to blue
 $("div[data-other-id='"+other_id+"']").show();
