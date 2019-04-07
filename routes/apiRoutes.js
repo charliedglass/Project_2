@@ -1,7 +1,7 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  // Get all examples
+  // Update messages as read
   app.put("/api/:myUID/:otherUID/read", function(req, res) {
     db.Messages.update(
       {
@@ -16,6 +16,7 @@ module.exports = function(app) {
     });
   });
 
+  // Updates messages as notified
   app.put("/api/was-notified/:myUID", function(req, res) {
     db.Messages.update(
       {
@@ -27,7 +28,7 @@ module.exports = function(app) {
     )
   });
 
-  // Create a new example
+  // Create a new message
   app.post("/api/:myUID/:myName/:toUID/:toName/:message/new_message", function(req, res) {
     db.Messages.create({
       from_uid: req.params.myUID,
@@ -41,6 +42,7 @@ module.exports = function(app) {
     });
   });
 
+  // Create a new user
   app.post("/api/new_user", function(req, res) {
     console.log(db.Users);
     db.Users.create({
@@ -51,10 +53,4 @@ module.exports = function(app) {
     });
   });
 
-  // Delete an example by id
-  // app.delete("/api/examples/:id", function(req, res) {
-  //   db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-  //     res.json(dbExample);
-  //   });
-  // });
 };

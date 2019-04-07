@@ -3,6 +3,7 @@ $(document).ready(function(){
 var other_id = sessionStorage.getItem("other_id", other_id);
 var other_name = sessionStorage.getItem("other_name", other_name);
 
+//reload page when refresh button clicked
 $("#refresh").on("click", function(){
     location.reload();
 });
@@ -14,6 +15,7 @@ if (other_name != null){
     $("#toNameicon").text(other_name.replace(/[a-z|\s]/g, '').substring(0,2));
 }
 
+//update that the user was notified of the message
 $.ajax("/api/was-notified/"+sessionStorage.getItem("uid"), {
     type: "PUT"
 });

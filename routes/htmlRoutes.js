@@ -9,7 +9,7 @@ module.exports = function(app) {
       res.render("index");
   });
 
-  // Load example page and pass in an example by id
+  // Get messages for a specific user
   app.get("/messages/:myUID", function(req, res) {
     var rendered = {};
     //get your user info
@@ -82,7 +82,6 @@ module.exports = function(app) {
               //aggregate all sequelize queries, change names for data attributes to work, then render to messages
               data["myName"] = data["myName"].replace(" ", "_");
               rendered = {myself:data};
-              console.log(rendered);
 
               data2.forEach(function(value){
                 if (value.isUnread > 0) {
@@ -94,22 +93,15 @@ module.exports = function(app) {
                 value["other_user_name_data"] = value["other_user_name"].replace(" ", "_");
               })
               rendered["users"] = data2;
-              console.log(rendered);
 
               data3.forEach(function(value){
-                console.log(value.wasNotified);
-                console.log(typeof value.wasNotified);
                 if (value.wasNotified == 0 && value.fromOther == true){
-                  console.log("notification time");
-                  console.log(value);
-                  console.log({title: value.from_name, message: value.message});
                   notifier.notify({
                     title: value.from_name,
                     message: value.message
                   });
                 }
                 else{
-                  console.log("no no no");
                 }
                 value["message_other_name_data"] = value["message_other_name"].replace(" ", "_");
                 value["from_name_data"] = value["from_name"].replace(" ", "_");
@@ -121,7 +113,6 @@ module.exports = function(app) {
                 value["name_data"] = value["name"].replace(" ", "_");
               })
               rendered["searchUsers"] = data4;
-              console.log(rendered);
               res.render("messages", rendered);
             })
           })

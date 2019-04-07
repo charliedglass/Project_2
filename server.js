@@ -8,9 +8,6 @@ var db = require("./models");
 var app = express();
 var PORT = process.env.PORT || 3000;
 
-// var server = require('http').createServer(app);
-// var io = require("socket.io")(server);
-
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -28,10 +25,6 @@ app.set("view engine", "handlebars");
 // Routes
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
-
-// io.on("connection", function(){
-//   console.log("the socket baby the socket");
-// });
 
 var syncOptions = { force: false };
 
