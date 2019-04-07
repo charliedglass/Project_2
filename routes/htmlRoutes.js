@@ -99,7 +99,13 @@ module.exports = function(app) {
                   notifier.notify({
                     title: value.from_name,
                     message: value.message
-                  });
+                  },
+                  function(err, response) {
+                    // Response is response from notification
+                    console.log(err);
+                    console.log(response);
+                  }
+                );
                   console.log("notified");
                 }
                 else{
